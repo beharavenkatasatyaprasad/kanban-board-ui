@@ -1,4 +1,4 @@
-import "./App.css";
+
 import Todo from "./Components/ToDo/Todo";
 import InProgress from "./Components/Inprogress/InProgress";
 import Done from "./Components/Done/Done";
