@@ -1,7 +1,6 @@
 import React from "react";
 
 function Item(props) {
-  let date = new Date();
 
   const handleStart = async () =>{
     const data= {
