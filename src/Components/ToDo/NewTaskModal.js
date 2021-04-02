@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 
 const customStyles = {
@@ -18,6 +18,10 @@ function NewTaskModal(props) {
   const [TaskLabel, setTaskLabel] = useState("");
   const [Pricing, setPricing] = useState("");
 
+  const Validate = () => {
+      return Pricing.length > 0 && !isNaN(Pricing) && TaskLabel.length > 0
+  }
+  
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -45,6 +49,8 @@ function NewTaskModal(props) {
             type="text"
             className="form-control"
             id="tasklabel"
+            value={TaskLabel}
+            onChange={(e) => setTaskLabel(e.target.value)}
             placeholder="gardening"
           />
         </div>
@@ -55,10 +61,16 @@ function NewTaskModal(props) {
           <span className="input-group-text" id="pricing">
             $
           </span>
-          <input type="number" className="form-control" placeholder="4" />
+          <input
+            type="number"
+            className="form-control"
+            placeholder="4"
+            value={Pricing}
+            onChange={(e) => setPricing(e.target.value)}
+          />
         </div>
         <div className="text-center">
-          <button type="submit" class="btn btn-primary px-5">
+          <button type="submit" class="btn btn-primary px-5" disabled={!Validate()}>
             Add To List
           </button>
         </div>
