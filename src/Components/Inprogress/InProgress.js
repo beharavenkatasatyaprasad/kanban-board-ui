@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import Item from "./Item";
 import { SemipolarLoading } from "react-loadingg";
 
-function InProgress() {
+function InProgress(props) {
   const [InProgressTasks, setInProgressTasks] = useState([]);
   const [IsLoading, setIsLoading] = useState(true);
   
@@ -20,24 +20,24 @@ function InProgress() {
     
     if(response.status === 202){
       setInProgressTasks(data.result)
+
       setIsLoading(false)
-    }else{
     }
   }
 
   useEffect(() => {
-    if(IsLoading) getData()
+   getData()
   })
 
   if (IsLoading) {
     return <SemipolarLoading />
   } else {
     const inProgressCards = InProgressTasks.map((task) =>{
-      return <Item task={task} setIsLoading={setIsLoading} />
+      return <Item task={task} setIsLoading={setIsLoading}/>
     })
 
     return (
-      <div className="container col-sm-4 my-3">
+      <div className="container my-3">
         <p className="count p-2 header">
           <span className="badge badge-primary">{InProgressTasks.length}</span> In Progress
         </p>

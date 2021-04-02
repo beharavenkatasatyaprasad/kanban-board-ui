@@ -3,7 +3,7 @@ import Item from "./Item";
 import NewTaskModal from "./NewTaskModal";
 import { SemipolarLoading } from "react-loadingg";
 
-function Todo() {
+function Todo(props) {
   const [Todo, SetToDo] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [IsLoading, setIsLoading] = useState(true);
@@ -15,8 +15,8 @@ function Todo() {
   function closeModal() {
     setIsOpen(false);
   }
-  
-  const getData = async() => {
+
+  const getData = async () => {
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -26,39 +26,42 @@ function Todo() {
       `http://localhost:5000/ToDoTasks`,
       requestOptions
     );
-    const data = await response.json()
-    
-    if(response.status === 202){
-      SetToDo(data.result)
-      setIsLoading(false)
-    }else{
+    const data = await response.json();
+
+    if (response.status === 202) {
+      SetToDo(data.result);
+      setIsLoading(false);
+    } else {
     }
-  }
+  };
   useEffect(() => {
-    if(IsLoading) getData()
-  })
-  
+    if (IsLoading) getData();
+  });
 
   if (IsLoading) {
     return <SemipolarLoading />;
   } else {
-    const toDoCards = Todo.map((task) =>{
-      return <Item task={task} setIsLoading={setIsLoading} />
-    })
+    const toDoCards = Todo.map((task) => {
+      return <Item task={task} setIsLoading={setIsLoading} />;
+    });
     return (
       <>
-        <div className="container col-sm-4 my-3">
+        <div className="container my-3">
           <p className="count p-2 header">
             <span className="badge badge-primary">{Todo.length}</span> To Do
           </p>
-         {toDoCards}
+          {toDoCards}
           <div className="btn-div text-center m-4">
             <button onClick={openModal} className="btn shadow btn-light">
               <i className="fa fa-plus" aria-hidden="true"></i> New Task
             </button>
           </div>
         </div>
-        <NewTaskModal modalIsOpen={modalIsOpen} closeModal={closeModal} setIsLoading={setIsLoading} />
+        <NewTaskModal
+          modalIsOpen={modalIsOpen}
+          closeModal={closeModal}
+          setIsLoading={setIsLoading}
+        />
       </>
     );
   }

@@ -1,24 +1,21 @@
-
 import Todo from "./Components/ToDo/Todo";
 import InProgress from "./Components/Inprogress/InProgress";
 import Done from "./Components/Done/Done";
-import Navbar from "./Components/Navbar/Navbar";
-import { Route, BrowserRouter, Switch } from "react-router-dom";
-
+import React, { useState } from "react";
 function App() {
+
+  
   return (
-    <div className="container-fluid">
-      <BrowserRouter>
-            <Navbar />
-        <Switch>
-          <Route exact path="/">
-            Home route
-          </Route>
-          <Route path="/todo" component={Todo}></Route>
-          <Route path="/inprogress" component={InProgress}></Route>
-          <Route path="/Done" component={Done}></Route>
-        </Switch>
-      </BrowserRouter>
+    <div className="container-fluid row">
+      <div className="col">
+        <Todo />
+      </div>
+      <div className="col">
+        <InProgress />
+      </div>
+      <div className="col" >
+        <Done />
+      </div>
     </div>
   );
 }

@@ -35,10 +35,7 @@ function NewTaskModal(props) {
       `http://localhost:5000/addTask`,
       requestOptions
     );
-    const result = await response.json();
-
     if (response.status === 202) {
-      console.log(result);
       props.setIsLoading(true);
       props.closeModal();
     } else {
