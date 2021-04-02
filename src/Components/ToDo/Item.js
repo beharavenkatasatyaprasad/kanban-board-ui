@@ -1,20 +1,37 @@
 import React from "react";
-import * as moment from 'moment'
 
 function Item(props) {
   let date = new Date();
 
-  const handleStart = () =>{
-    console.log(date)
+  const handleStart = async () =>{
+    const data= {
+      id: props.task._id
+    }
+    
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body:JSON.stringify(data)
+    };
+
+    const response = await fetch(
+      `http://localhost:5000/startTask`,
+      requestOptions
+    );
+    
+    if(response.status === 202){
+      props.setIsLoading(true);
+    }
+    
   }
   
   return (
-    <div className="card p-4 shadow m-auto">
+    <div className="card p-4 shadow my-2">
       <div className="row">
         <div className="col">
           <p>
             <i className="fa fa-tasks" aria-hidden="true"></i> {' '}
-            Build a house
+            {props.task.tasklabel}
           </p>
         </div>
         <div className="col text-right">

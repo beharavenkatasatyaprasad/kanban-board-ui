@@ -15,19 +15,51 @@ const customStyles = {
 };
 
 function NewTaskModal(props) {
+
   const [TaskLabel, setTaskLabel] = useState("");
   const [Pricing, setPricing] = useState("");
-
-  const Validate = () => {
-      return Pricing.length > 0 && !isNaN(Pricing) && TaskLabel.length > 0
-  }
+  const [buttonText, setbuttonText] = useState("Add to List");
   
+  const Validate = () => {
+    return Pricing.length > 0 && !isNaN(Pricing) && TaskLabel.length > 0;
+  };
+
+  const AddTask = async (data) => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+
+    const response = await fetch(
+      `http://localhost:5000/addTask`,
+      requestOptions
+    );
+    const result = await response.json();
+
+    if (response.status === 202) {
+      console.log(result);
+      props.setIsLoading(true);
+      props.closeModal();
+    } else {
+      setbuttonText("Something went wrong please try again");
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const data = {
+      tasklabel: TaskLabel,
+      pricing: Pricing,
+    };
+
+    AddTask(data);
   };
 
   return (
     <Modal
+      ariaHideApp={true}
       isOpen={props.modalIsOpen}
       onRequestClose={props.closeModal}
       style={customStyles}
@@ -42,7 +74,7 @@ function NewTaskModal(props) {
       <h2 className="text-center">Add New Task</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="mb-3">
-          <label for="tasklabel" className="form-label">
+          <label htmlFor="tasklabel" className="form-label">
             Task Label
           </label>
           <input
@@ -54,7 +86,7 @@ function NewTaskModal(props) {
             placeholder="gardening"
           />
         </div>
-        <label for="pricing" className="form-label">
+        <label htmlFor="pricing" className="form-label">
           Pricing per Hour
         </label>
         <div className="input-group mb-3 flex-nowrap">
@@ -70,8 +102,12 @@ function NewTaskModal(props) {
           />
         </div>
         <div className="text-center">
-          <button type="submit" className="btn btn-primary px-5" disabled={!Validate()}>
-            Add To List
+          <button
+            type="submit"
+            className="btn btn-primary px-5"
+            disabled={!Validate()}
+          >
+            {buttonText}
           </button>
         </div>
       </form>
