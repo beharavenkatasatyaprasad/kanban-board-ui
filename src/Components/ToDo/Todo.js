@@ -28,7 +28,7 @@ function Todo() {
           <Item items={Todo} />
           <div className="btn-div text-center m-4">
             <button onClick={openModal} className="btn shadow btn-light">
-              <i class="fa fa-plus" aria-hidden="true"></i> New Task
+              <i className="fa fa-plus" aria-hidden="true"></i> New Task
             </button>
           </div>
         </div>

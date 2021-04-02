@@ -70,7 +70,7 @@ function NewTaskModal(props) {
           />
         </div>
         <div className="text-center">
-          <button type="submit" class="btn btn-primary px-5" disabled={!Validate()}>
+          <button type="submit" className="btn btn-primary px-5" disabled={!Validate()}>
             Add To List
           </button>
         </div>
