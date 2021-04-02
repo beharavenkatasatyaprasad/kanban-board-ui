@@ -28,13 +28,14 @@ function InProgress() {
   useEffect(() => {
     if(IsLoading) getData()
   })
+
   const DoneCards = DoneTasks.map((task) =>{
     return <Item task={task} setIsLoading={setIsLoading} />
   })
+
   if (IsLoading) {
     return <SemipolarLoading />
   } else {
-
     return (
       <div className="container col-sm-4 my-3">
         <p className="count p-2 header">
