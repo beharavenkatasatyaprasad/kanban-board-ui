@@ -10,11 +10,8 @@ function Item(props) {
             Build a house
           </p>
           <p className="timer cost px-4 py-0 m-0">
-            00:08:43
+            $5.15
           </p>
-        </div>
-        <div className="col text-right py-0">
-          <button className="btn btn-success">Resolve</button>
         </div>
       </div>
     </div>
