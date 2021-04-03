@@ -1,7 +1,7 @@
 import Todo from "./Components/ToDo/Todo";
 import InProgress from "./Components/Inprogress/InProgress";
 import Done from "./Components/Done/Done";
-import React, { useState } from "react";
+import React from "react";
 function App() {
 
   
